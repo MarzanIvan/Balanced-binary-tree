@@ -2,6 +2,8 @@
 *.d
 cmake-build-debug
 .idea
+.DS_Store
+CXXTEST/
 # Compiled Object files
 *.slo
 *.lo

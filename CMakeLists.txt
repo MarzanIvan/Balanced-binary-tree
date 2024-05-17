@@ -5,4 +5,7 @@ project(AVL)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(AVL map.cxx map.hxx)
+add_executable(AVL map.cxx map.hxx
+        node.cxx
+        node.hxx
+        node.hxx)
