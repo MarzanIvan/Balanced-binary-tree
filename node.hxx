@@ -32,6 +32,26 @@ namespace custom {
             right.reset();
         }
 
+        // set pointer of left node (delete nullptr(worthless) and set pointer)
+        void setleft(node<valtype, comparator>* child) {
+            left.reset(child);
+        }
+
+        // set pointer of right node (delete nullptr(worthless) and set pointer)
+        void setright(node<valtype, comparator>* child) {
+            right.reset(child);
+        }
+
+        // swap nodes to exchange pointers
+        void swapleft(std::unique_ptr<node<valtype, comparator>>& child) {
+            left.swap(child);
+        }
+
+        // swap nodes to exchange pointers
+        void swapright(std::unique_ptr<node<valtype, comparator>>& child) {
+            right.swap(child);
+        }
+
         // (using ref) to support lambda, functor and pointer function comparators
         bool compare(const node<valtype,comparator>& arg) {
             return comp(*this->value.get(), *arg.value.get());

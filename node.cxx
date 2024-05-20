@@ -15,12 +15,9 @@ bool fun(int arg1, int arg2) {
 int main() {
     int number{3};
     int gnumber{5};
+    custom::node<int,G>* nm = new custom::node<int,G>(10);
     custom::node<int,G> newnode(number), secondnode(gnumber);
-    if (newnode.compare(secondnode)) {
-        std::cout << "success";
-    }
-    custom::node<int, G>* n = new custom::node<int,G>(number);
-    delete n;
-    std::cout << "success delete itself";
+    newnode.setleft(nm);
+    std::cout << newnode.left.get()->getvalue();
     return 0;
 }
