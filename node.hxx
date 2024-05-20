@@ -1,17 +1,18 @@
 #pragma once
 #include <iostream>
+#include <memory>
 
 namespace custom {
 
     template<class valtype>
     class node {
     private:
-        valtype* value;
+        std::unique_ptr<valtype> value;
 
     public:
         signed char balance;
-        node<valtype>* left;
-        node<valtype>* right;
+        std::unique_ptr<node<valtype>> left;
+        std::unique_ptr<node<valtype>> right;
 
     public:
         explicit node(valtype value, char balance = 0, node<valtype>* left = nullptr, node<valtype>* right = nullptr) : value(new valtype(value)), balance(balance), left(left), right(right) {
@@ -20,15 +21,14 @@ namespace custom {
 
         node() = delete; // empty object mustn't exist
 
-        const valtype* getvalue() const {
-            if (value) return value;
+        const valtype& getvalue() const {
+            return *value;
         }
 
-
         ~node() {
-            delete value;
-            delete left;
-            delete right;
+            value.reset();
+            left.reset();
+            right.reset();
         }
 
         node(const node& copy) = delete;
