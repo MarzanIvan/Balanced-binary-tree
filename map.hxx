@@ -3,12 +3,11 @@
 #include <stdint.h>
 #include "node.hxx"
 
-
 namespace custom {
 
-    template<class valtype>
+    template<class valtype, class comparator>
     class map {
-        custom::node<valtype>* head;
+        custom::node<valtype,comparator>* head;
         intmax_t size;
 
         map() {
@@ -16,7 +15,7 @@ namespace custom {
             head = nullptr;
         }
 
-        map(custom::node<valtype>* head) : head{head} {
+        map(custom::node<valtype,comparator>* head) : head{head} {
             size = 1;
         }
 

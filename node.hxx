@@ -4,18 +4,19 @@
 
 namespace custom {
 
-    template<class valtype>
+    template<class valtype, class comparator>
     class node {
     private:
         std::unique_ptr<valtype> value;
+        const comparator comp; //custom comparator
 
     public:
         signed char balance;
-        std::unique_ptr<node<valtype>> left;
-        std::unique_ptr<node<valtype>> right;
+        std::unique_ptr<node<valtype, comparator>> left;
+        std::unique_ptr<node<valtype, comparator>> right;
 
     public:
-        explicit node(valtype value, char balance = 0, node<valtype>* left = nullptr, node<valtype>* right = nullptr) : value(new valtype(value)), balance(balance), left(left), right(right) {
+        explicit node(valtype value, char balance = 0, node<valtype, comparator>* left = nullptr, node<valtype, comparator>* right = nullptr) : value(new valtype(value)), balance(balance), left(left), right(right) {
             /*to use initializer list constructor*/
         }// other converting is prohibited
 
@@ -29,6 +30,11 @@ namespace custom {
             value.reset();
             left.reset();
             right.reset();
+        }
+
+        // to support lambda, functor and pointer function comparators
+        bool compare(const node<valtype,comparator>& arg) {
+            return comp(*this->value.get(), *arg.value.get());
         }
 
         node(const node& copy) = delete;
