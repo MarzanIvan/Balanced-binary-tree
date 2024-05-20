@@ -32,9 +32,14 @@ namespace custom {
             right.reset();
         }
 
-        // to support lambda, functor and pointer function comparators
+        // (using ref) to support lambda, functor and pointer function comparators
         bool compare(const node<valtype,comparator>& arg) {
             return comp(*this->value.get(), *arg.value.get());
+        }
+
+        // (using pointer) to support lambda, functor and pointer function comparators
+        bool compare(const node<valtype,comparator>* arg) {
+            return comp(*this->value.get(), *arg->value.get());
         }
 
         node(const node& copy) = delete;
