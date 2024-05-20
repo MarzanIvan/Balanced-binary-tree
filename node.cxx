@@ -1,15 +1,10 @@
-//
-// Created by Ioann Marzan on 17.05.2024.
-//
+#pragma once
 
 #include "node.hxx"
 #include <iostream>
 
-namespace custom {
-} // custom
-
 int main() {
     custom::node<int> newnode;
-    std::cout << &newnode.right;
+    std::cout << "hello";
     return 0;
 }

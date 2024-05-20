@@ -1,37 +1,38 @@
-//
-// Created by Ioann Marzan on 17.05.2024.
-//
-
-#ifndef AVL_NODE_HXX
-#define AVL_NODE_HXX
+#pragma once
+#include <iostream>
 
 namespace custom {
 
     template<class valtype>
     class node {
-    public:
+    private:
         valtype* value;
+
+    public:
         signed char balance;
         node<valtype>* left;
         node<valtype>* right;
+
     public:
-        node(valtype* value, char balance = 0, valtype* left = nullptr, valtype* right = nullptr) : value(value), balance(balance), left(left), right(right) {
+        explicit node(valtype value, char balance = 0, node<valtype>* left = nullptr, node<valtype>* right = nullptr) : value(new valtype(value)), balance(balance), left(left), right(right) {
             /*to use initializer list constructor*/
+        }// other converting is prohibited
+
+        node() = delete; // empty object mustn't exist
+
+        const valtype* getvalue() const {
+            if (value) return value;
         }
 
-        node() : value{}, balance{}, left{}, right{}
-        {}
 
         ~node() {
             delete value;
             delete left;
             delete right;
         }
+
         node(const node& copy) = delete;
-        node& operator=(const node& operand) = delete;
+        node& operator=(const node& arg) = delete;
 
     };
-
-} // custom
-
-#endif //AVL_NODE_HXX
+}
